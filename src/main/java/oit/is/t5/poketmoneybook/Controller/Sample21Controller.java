@@ -1,4 +1,4 @@
-package oit.is.t5.poketmoneybook.controller;
+package oit.is.t5.poketmoneybook.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
