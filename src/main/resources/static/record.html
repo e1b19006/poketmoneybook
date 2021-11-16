@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>記録</title>
+</head>
+
+<body>
+  <!--<h1>Authorized! <span sec:authentication="name"></span>
+  </h1>
+  <a href="/logout">ログアウト</a>-->
+
+  <h2>Log</h2>
+
+  <a href="/record/log">記録一覧</a>
+  <div th:if="${log}">
+    <table border="1">
+      <thead>
+        <th>ID</th>
+        <th>金額</th>
+        <th>どこから</th>
+        <th>なにに</th>
+        <th>日付</th>
+      </thead>
+      <tbody>
+        <tr th:each="log,stat:${log1}">
+          <td>index:[$[{stat.index}]]</td>
+          <td>金額:[$[{log.value}]]</td>
+          <td>どこから:[$[{log.kind_id}]]</td>
+          <td>なにに:[$[{log.type_id}]]</td>
+          <td>日付:[$[{log.date}]]</td>
+        </tr >
+      </tbody>
+    </table>
+  </div>
+  <div th:if="${fruit3}">
+    [[${fruit3.name}]]を[[${fruit3.price}]]円で購入しました
+  </div>
+
+  <div th:if="${fruit4}">
+    果物を編集します
+    <form th:action="@{/sample5/step5(id=${fruit4.id})}" method="post">
+      <!--DBで取得した値をテキストフィールドに入れたい場合は th:valueを利用する-->
+      <input type="text" name="name" th:value="${fruit4.name}" /><br>
+      <input type="number" name="price" th:value="${fruit4.price}" /><br>
+      <input type="submit" value="編集"><input type="reset" value="リセット">
+    </form>
+  </div>
+</body>
+
+</html>
