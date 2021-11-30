@@ -8,14 +8,6 @@ public class Record {
   String date;
   String time;
 
-  public Record(int log_id, int value, int kind_id, int type_id, String date, String time) {
-    this.log_id = log_id;
-    this.value = value;
-    this.kind_id = kind_id;
-    this.type_id = type_id;
-    this.date = date;
-    this.time = time;
-  }
 
   public int getLog_id() {
     return log_id;

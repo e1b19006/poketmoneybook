@@ -29,4 +29,26 @@ public class RecordController {
     return "record.html";
   }
 
+  /**
+   *
+   * @param value
+   * @param kind_id
+   * @param type_id
+   * @param model
+   * @return
+   */
+
+  @PostMapping("log/insert")
+  @Transactional
+  public String insert(@RequestParam Integer value, @RequestParam Integer kind_id, @RequestParam Integer type_id,
+      ModelMap model) {
+    Record record2 = new Record();
+    record2.setValue(value);
+    record2.setKind_id(kind_id);
+    record2.setType_id(type_id);
+    record2.setDate("0000-00-00");
+    record2.setTime("00:00:00");
+    return "record.html";
+  }
+
 }
