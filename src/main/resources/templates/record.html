@@ -35,6 +35,16 @@
     </table>
   </div>
 
+  <form th:action="@{/Record/insert}" method="post">
+    <input type="number" name="log_id">
+    <input type="number" name="value">
+    <input type="number" name="kind_id">
+    <input type="number" name="type_id">
+    <input type="submit" value="登録">
+    <input type="reset" value="リセット">
+  </form>
+
+
 </body>
 
 </html>
