@@ -31,23 +31,26 @@ public class RecordController {
 
   /**
    *
-   * @param value
-   * @param kind_id
-   * @param type_id
+   *
    * @param model
    * @return
    */
 
-  @PostMapping("log/insert")
+  @PostMapping("/insert")
   @Transactional
-  public String insert(@RequestParam Integer value, @RequestParam Integer kind_id, @RequestParam Integer type_id,
-      ModelMap model) {
+  public String insert(@RequestParam Integer log_id, @RequestParam Integer value, @RequestParam Integer kind_id,
+      @RequestParam Integer type_id, ModelMap model) {
+
+    System.out.println("log_id" + log_id);
     Record record2 = new Record();
+    record2.setValue(log_id);
     record2.setValue(value);
     record2.setKind_id(kind_id);
     record2.setType_id(type_id);
-    record2.setDate("0000-00-00");
+    record2.setDate("2021-11-30");
     record2.setTime("00:00:00");
+    recordMapper.insertLog(record2);
+    model.addAttribute("record2", record2);
     return "record.html";
   }
 
