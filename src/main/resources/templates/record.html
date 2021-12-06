@@ -27,8 +27,8 @@
         <tr th:each="log1,stat:${log1}">
           <td>ID:[[${log1.log_id}]]</td>
           <td>金額:[[${log1.value}]]</td>
-          <td>どこから:[[${log1.kind_id}]]</td>
-          <td>なにに:[[${log1.type_id}]]</td>
+          <td>どこから:[[${log1.kind_name}]]</td>
+          <td>なにに:[[${log1.type_name}]]</td>
           <td>日付:[[${log1.date}]]</td>
         </tr>
       </tbody>
