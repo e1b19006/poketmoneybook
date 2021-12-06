@@ -15,8 +15,8 @@ public interface RecordMapper {
   @Select("select * from log where log_id = #{log_id}")
   Record selectById(int log_id);
 
-  @Insert("insert into log (log_id, value, kind_id, type_id, date, time) values(#{log_id}, #{value}, #{kind_id}, #{type_id}, #{date}, #{time})")
-
+  @Insert("insert into log ( value, kind_id, type_id, date, time) values(#{value}, #{kind_id}, #{type_id},CURRENT_DATE,CURRENT_TIME)")
+  @Options(useGeneratedKeys = true, keyColumn = "log_id", keyProperty = "log_id")
   void insertLog(Record record);
 
 }

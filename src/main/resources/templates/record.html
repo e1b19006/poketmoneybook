@@ -25,7 +25,7 @@
       </thead>
       <tbody>
         <tr th:each="log1,stat:${log1}">
-          <td>index:[[${stat.index}]]</td>
+          <td>ID:[[${log1.log_id}]]</td>
           <td>金額:[[${log1.value}]]</td>
           <td>どこから:[[${log1.kind_id}]]</td>
           <td>なにに:[[${log1.type_id}]]</td>
@@ -36,7 +36,6 @@
   </div>
 
   <form th:action="@{/Record/insert}" method="post">
-    <input type="number" name="log_id">
     <input type="number" name="value">
     <input type="number" name="kind_id">
     <input type="number" name="type_id">
