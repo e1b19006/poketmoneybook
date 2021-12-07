@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface RecordMapper {
-  @Select("select * from log join kind on (log.kind_id = kind.kind_id) join type on (log.type_id = type.type_id)")
+  @Select("select * from log join kind on (log.kind_id = kind.kind_id) join type on (log.type_id = type.type_id) join user on (log.user_id = user.user_id)")
   ArrayList<Record> selectAllRecord();
 
   @Select("select * from log where log_id = #{log_id}")

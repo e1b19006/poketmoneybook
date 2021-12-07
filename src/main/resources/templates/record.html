@@ -18,6 +18,7 @@
     <table border="1">
       <thead>
         <th>ID</th>
+        <th>ユーザー名</th>
         <th>金額</th>
         <th>どこから</th>
         <th>なにに</th>
@@ -26,6 +27,7 @@
       <tbody>
         <tr th:each="log1,stat:${log1}">
           <td>ID:[[${log1.log_id}]]</td>
+          <td>ユーザー名:[[${log1.user_name}]]</td>
           <td>金額:[[${log1.value}]]</td>
           <td>どこから:[[${log1.kind_name}]]</td>
           <td>なにに:[[${log1.type_name}]]</td>
