@@ -3,22 +3,29 @@ package oit.is.t5.poketmoneybook.model;
 public class Record {
   int log_id;
   int value;
+  int user_id;
   int kind_id;
   int type_id;
   String date;
   String time;
   String kind_name;
   String type_name;
-  String user_id;
+  String user_name;
 
-
-
-  public String getUser_id() {
+  public int getUser_id() {
     return user_id;
   }
 
-  public void setUser_id(String user_id) {
+  public void setUser_id(int user_id) {
     this.user_id = user_id;
+  }
+
+  public String getUser_name() {
+    return user_name;
+  }
+
+  public void setUser_name(String user_name) {
+    this.user_name = user_name;
   }
 
   public String getKind_name() {
