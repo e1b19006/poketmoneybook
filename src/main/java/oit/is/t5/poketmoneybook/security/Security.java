@@ -12,24 +12,24 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 
-
-public class Security extends WebSecurityConfigurerAdapter{
+public class Security extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
     // 平文のパスワードをエンコーダにかけてハッシュ化し，"user1"と関連付けている．ロール名は"USER"
     // プログラム中に素のパスワードが含まれることになるので望ましくない
-    auth.inMemoryAuthentication().withUser("user1").password(passwordEncoder().encode("p@ss")).roles("USER");
+    auth.inMemoryAuthentication().withUser("00001").password(passwordEncoder().encode("p@ss")).roles("USER");
 
-    auth.inMemoryAuthentication().withUser("user2").password(passwordEncoder().encode("p@ss")).roles("USER");
+    auth.inMemoryAuthentication().withUser("00002").password(passwordEncoder().encode("p@ss")).roles("USER");
   }
-   @Bean
+
+  @Bean
   PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
 
-   @Override
+  @Override
   protected void configure(HttpSecurity http) throws Exception {
     // Spring Securityのフォームを利用してログインを行う
     http.formLogin();
@@ -47,9 +47,8 @@ public class Security extends WebSecurityConfigurerAdapter{
      * CSRFがONになっているとフォームが対応していないためアクセスできない
      * HTTPヘッダのX-Frame-OptionsがDENYになるとiframeでlocalhostでのアプリが使えなくなるので，H2DBのWebクライアントのためだけにdisableにする必要がある
      */
-    //http.csrf().disable();
-    //http.headers().frameOptions().disable();
+    // http.csrf().disable();
+    // http.headers().frameOptions().disable();
   }
-
 
 }

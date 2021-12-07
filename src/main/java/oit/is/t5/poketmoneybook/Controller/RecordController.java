@@ -23,8 +23,9 @@ public class RecordController {
   RecordMapper recordMapper;
 
   @GetMapping("log")
-  public String log(ModelMap model) {
-    ArrayList<Record> record = recordMapper.selectAllRecord();
+  public String log(ModelMap model, Principal prin) {
+    int user_id = Integer.parseInt(prin.getName());
+    ArrayList<Record> record = recordMapper.selectAllRecord(user_id);
     model.addAttribute("log1", record);
     return "record.html";
   }
@@ -38,11 +39,12 @@ public class RecordController {
 
   @PostMapping("/insert")
   @Transactional
-  public String insert(@RequestParam Integer value, @RequestParam Integer kind_id,
-      @RequestParam Integer type_id, ModelMap model) {
-
+  public String insert(@RequestParam Integer value, @RequestParam Integer kind_id, @RequestParam Integer type_id,
+      ModelMap model, Principal prin) {
+    int user_id = Integer.parseInt(prin.getName());
     Record record2 = new Record();
     record2.setValue(value);
+    record2.setUser_id(user_id);
     record2.setKind_id(kind_id);
     record2.setType_id(type_id);
     record2.setDate("2010-05-11");

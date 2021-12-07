@@ -14,37 +14,38 @@
   <h2>Log</h2>
 
   <a href="/Record/log">記録一覧</a>
-  <div th:if="${log1}">
-    <table border="1">
-      <thead>
-        <th>ID</th>
-        <th>ユーザー名</th>
-        <th>金額</th>
-        <th>どこから</th>
-        <th>なにに</th>
-        <th>日付</th>
-      </thead>
-      <tbody>
-        <tr th:each="log1,stat:${log1}">
-          <td>[[${log1.log_id}]]</td>
-          <td>[[${log1.user_name}]]</td>
-          <td>[[${log1.value}]]</td>
-          <td>[[${log1.kind_name}]]</td>
-          <td>[[${log1.type_name}]]</td>
-          <td>[[${log1.date}]]</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <div <h3>ようこそ <div sec:authentication="name"></div>
+    </h3>
 
-  <form th:action="@{/Record/insert}" method="post">
-    <input type="number" name="value">
-    <input type="number" name="kind_id">
-    <input type="number" name="type_id">
-    <input type="submit" value="登録">
-    <input type="reset" value="リセット">
-  </form>
-  <a href="/logout">ログアウト</a>
+    <div th:if="${log1}">
+      <table border="1">
+        <thead>
+          <th>ID</th>
+          <th>金額</th>
+          <th>どこから</th>
+          <th>なにに</th>
+          <th>日付</th>
+        </thead>
+        <tbody>
+          <tr th:each="log1,stat:${log1}">
+            <td>[[${log1.log_id}]]</td>
+            <td>[[${log1.value}]]</td>
+            <td>[[${log1.kind_name}]]</td>
+            <td>[[${log1.type_name}]]</td>
+            <td>[[${log1.date}]]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <form th:action="@{/Record/insert}" method="post">
+      <input type="number" name="value">
+      <input type="number" name="kind_id">
+      <input type="number" name="type_id">
+      <input type="submit" value="登録">
+      <input type="reset" value="リセット">
+    </form>
+    <a href="/logout">ログアウト</a>
 
 
 </body>
