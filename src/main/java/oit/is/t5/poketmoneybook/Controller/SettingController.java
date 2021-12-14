@@ -25,7 +25,7 @@ public class SettingController {
   @GetMapping
   public String log(ModelMap model, Principal prin) {
     int user_id = Integer.parseInt(prin.getName());
-    ArrayList<Kind> kind = settingMapper.selectAllUserkind(user_id);
+    ArrayList<Kind> kind = kindMapper.selectAllUserkind(user_id);
     model.addAttribute("setting1", kind);
     return "record.html";
   }

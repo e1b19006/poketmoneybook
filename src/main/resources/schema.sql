@@ -3,6 +3,11 @@ CREATE TABLE kind(
   kind_name CHAR NOT NULL
 );
 
+CREATE TABLE kind00001(
+  kind_id IDENTITY PRIMARY KEY,
+  kind_name CHAR NOT NULL
+);
+
 CREATE TABLE user(
   user_id IDENTITY PRIMARY KEY,
   user_name CHAR NOT NULL
