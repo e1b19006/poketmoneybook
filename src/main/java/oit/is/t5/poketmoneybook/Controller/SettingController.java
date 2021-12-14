@@ -23,10 +23,22 @@ public class SettingController {
   KindMapper kindMapper;
 
   @GetMapping
-  public String log(ModelMap model, Principal prin) {
+  public String setting(ModelMap model, Principal prin) {
     int user_id = Integer.parseInt(prin.getName());
     ArrayList<Kind> kind = kindMapper.selectAllUserkind(user_id);
     model.addAttribute("setting1", kind);
-    return "record.html";
+    return "setting.html";
+  }
+
+  @PostMapping("/insert")
+  @Transactional
+  public String insertKind(@RequestParam String kind_name,ModelMap model, Principal prin ) {
+    int user_id = Integer.parseInt(prin.getName());
+    Kind kind2 = new Kind();
+    kind2.setUser_id(user_id);
+    kind2.setKind_name(kind_name);
+    kindMapper.insertKind(kind2);
+    return "setting.html";
+
   }
 }

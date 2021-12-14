@@ -50,7 +50,7 @@ public class RecordController {
     record2.setDate("2010-05-11");
     record2.setTime("00:00:00");
     recordMapper.insertLog(record2);
-    model.addAttribute("record2", record2);
+    // model.addAttribute("record2", record2);
     return "record.html";
   }
 

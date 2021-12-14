@@ -9,11 +9,12 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface KindMapper {
-  @Select("if exists (select * from sys.objects where object_id = OBJECT_ID(N'kind#{user_id}')and type in (N'U')) select * from kind#{user_id} else select * from kind#{user_id}")
+  @Select("select * from kind where user_id = #{user_id}")
   ArrayList<Kind> selectAllUserkind(int user_id);
 
-  // "if exists (select * from sys.objects where object_id =
-  // OBJECT_ID(N'kind#{user_id}')and type in (N'U')) select * from kind#{user_id}
-  // else create table kind#{user_id} (kind_id identity primary key,kind_name char
-  // not null)"
+  @Insert("insert into kind (user_id, kind_name)values(#{user_id}, #{kind_name})")
+  void insertKind(Kind kind);
+
+
+
 }
