@@ -32,12 +32,14 @@ public class SettingController {
 
   @PostMapping("/insert")
   @Transactional
-  public String insertKind(@RequestParam String kind_name,ModelMap model, Principal prin ) {
+  public String insertKind(@RequestParam String kind_name, ModelMap model, Principal prin) {
     int user_id = Integer.parseInt(prin.getName());
     Kind kind2 = new Kind();
     kind2.setUser_id(user_id);
     kind2.setKind_name(kind_name);
     kindMapper.insertKind(kind2);
+    ArrayList<Kind> kind = kindMapper.selectAllUserkind(user_id);
+    model.addAttribute("setting1", kind);
     return "setting.html";
 
   }
