@@ -1,6 +1,6 @@
-INSERT INTO kind(kind_name)VALUES('財布');
-INSERT INTO kind(kind_name)VALUES('銀行');
-INSERT INTO kind(kind_name)VALUES('クレジット');
+INSERT INTO kind(user_id,kind_name)VALUES(00001,'財布');
+INSERT INTO kind(user_id,kind_name)VALUES(00001,'銀行');
+INSERT INTO kind(user_id,kind_name)VALUES(00002,'クレジット');
 INSERT INTO type(type_name)VALUES('食料品');
 INSERT INTO type(type_name)VALUES('消耗品');
 INSERT INTO type(type_name)VALUES('パソコン');
