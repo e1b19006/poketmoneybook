@@ -13,6 +13,8 @@
 
   <h2>Setting</h2>
 
+  <h3>金種を追加</h3>
+
   <div th:if="${setting1}">
     <table border="1">
       <thead>
@@ -33,11 +35,14 @@
     <input type="reset" value="リセット">
   </form>
 
+
+  <h3>種別を追加</h3>
+
   <div th:if="${setting2}">
     <table border="1">
       <thead>
         <th>ID</th>
-        <th>金種</th>
+        <th>種別</th>
       </thead>
       <tbody>
         <tr th:each="setting2,stat:${setting2}">
@@ -53,7 +58,7 @@
     <input type="reset" value="リセット">
   </form>
 
-  <a href="/logout">ログアウト</a>
+  <a href="/">戻る</a>
 
 </body>
 
