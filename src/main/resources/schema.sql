@@ -12,6 +12,7 @@ CREATE TABLE user(
 
 CREATE TABLE type(
   type_id IDENTITY PRIMARY KEY,
+  user_id INT NOT NULL,
   type_name CHAR NOT NULL
 );
 
