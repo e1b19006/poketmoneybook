@@ -1,10 +1,10 @@
 INSERT INTO kind(user_id,kind_name)VALUES(00001,'財布');
 INSERT INTO kind(user_id,kind_name)VALUES(00001,'銀行');
 INSERT INTO kind(user_id,kind_name)VALUES(00002,'クレジット');
-INSERT INTO type(type_name)VALUES('食料品');
-INSERT INTO type(type_name)VALUES('消耗品');
-INSERT INTO type(type_name)VALUES('パソコン');
-INSERT INTO type(type_name)VALUES('その他');
+INSERT INTO type(user_id,type_name)VALUES(00001,'食料品');
+INSERT INTO type(user_id,type_name)VALUES(00001,'消耗品');
+INSERT INTO type(user_id,type_name)VALUES(00001,'パソコン');
+INSERT INTO type(user_id,type_name)VALUES(00002,'その他');
 INSERT INTO user(user_name)VALUES('user1');
 INSERT INTO user(user_name)VALUES('user2');
 

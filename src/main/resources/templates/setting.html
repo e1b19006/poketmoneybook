@@ -27,8 +27,28 @@
       </tbody>
     </table>
   </div>
-  <form th:action="@{/Setting/insert}" method="post">
+  <form th:action="@{/Setting/kind_insert}" method="post">
     <input type="text" name="kind_name">
+    <input type="submit" value="登録">
+    <input type="reset" value="リセット">
+  </form>
+
+  <div th:if="${setting2}">
+    <table border="1">
+      <thead>
+        <th>ID</th>
+        <th>金種</th>
+      </thead>
+      <tbody>
+        <tr th:each="setting2,stat:${setting2}">
+          <td>[[${setting2.type_id}]]</td>
+          <td>[[${setting2.type_name}]]</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <form th:action="@{/Setting/type_insert}" method="post">
+    <input type="text" name="type_name">
     <input type="submit" value="登録">
     <input type="reset" value="リセット">
   </form>
