@@ -36,7 +36,19 @@ public class StatisticsController {
   public String statistics(ModelMap model, Principal prin) {
     LocalDateTime nowDate = LocalDateTime.now();
     DateTimeFormatter java8Format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
     String java8Disp = nowDate.format(java8Format);
+    System.out.println(java8Disp);
+    int user_id = Integer.parseInt(prin.getName());
+    System.out.println(user_id + " " + java8Disp);
+    ArrayList<Record> record = statisticsMapper.selectTypeRecord(user_id, java8Disp);
+    model.addAttribute("statistics1", record);
+    return "statistics.html";
+  }
+
+  @PostMapping
+  public String statistics(@RequestParam String value, ModelMap model, Principal prin) {
+    String java8Disp = value;
     System.out.println(java8Disp);
     int user_id = Integer.parseInt(prin.getName());
     System.out.println(user_id + " " + java8Disp);
