@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>統計</title>
+</head>
+
+<body>
+
+  <h2>Statistics</h2>
+
+    <div th:if="${statistics1}">
+      <table border="1">
+        <thead>
+          <th>種別</th>
+          <th>金額</th>
+          <th>金種</th>
+        </thead>
+        <tbody>
+          <tr th:each="statistics1,stat:${statistics1}">
+            <td>[[${statistics1.type_name}]]</td>
+            <td>[[${statistics1.value}]]</td>
+            <td>[[${statistics1.kind_name}]]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <form th:action="@{/Statistics}" method="post">
+      <input type="date" name="value">
+      <input type="submit" value="検索">
+      <input type="reset" value="リセット">
+    </form>
+    <a href="/">戻る</a>
+
+
+</body>
+
+</html>
