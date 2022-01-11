@@ -15,18 +15,30 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import oit.is.t5.poketmoneybook.model.Record;
 import oit.is.t5.poketmoneybook.model.RecordMapper;
+import oit.is.t5.poketmoneybook.model.Kind;
+import oit.is.t5.poketmoneybook.model.KindMapper;
+import oit.is.t5.poketmoneybook.model.Type;
+import oit.is.t5.poketmoneybook.model.TypeMapper;
 
 @Controller
 @RequestMapping("/Record")
 public class RecordController {
   @Autowired
   RecordMapper recordMapper;
+  @Autowired
+  KindMapper kindMapper;
+  @Autowired
+  TypeMapper typeMapper;
 
   @GetMapping("log")
   public String log(ModelMap model, Principal prin) {
     int user_id = Integer.parseInt(prin.getName());
     ArrayList<Record> record = recordMapper.selectAllRecord(user_id);
     model.addAttribute("log1", record);
+    ArrayList<Kind> kind = kindMapper.selectAllUserkind(user_id);
+    ArrayList<Type> type = typeMapper.selectAllUsertype(user_id);
+    model.addAttribute("setting1", kind);
+    model.addAttribute("setting2", type);
     return "record.html";
   }
 

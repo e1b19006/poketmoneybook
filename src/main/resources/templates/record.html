@@ -22,8 +22,8 @@
         <thead>
           <th>ID</th>
           <th>金額</th>
-          <th>どこから</th>
-          <th>なにに</th>
+          <th>金種</th>
+          <th>種別</th>
           <th>日付</th>
         </thead>
         <tbody>
@@ -39,13 +39,43 @@
     </div>
 
     <form th:action="@{/Record/insert}" method="post">
-      <input type="number" name="value">
-      <input type="number" name="kind_id">
-      <input type="number" name="type_id">
+      <label>金額<input type="number" name="value"></label>
+      <label> 金種<input type="number" name="kind_id"></label>
+      <label> 種別<input type="number" name="type_id"></label>
       <input type="submit" value="登録">
       <input type="reset" value="リセット">
     </form>
     <a href="/">戻る</a>
+
+    <div th:if="${setting1}">
+      <table border="1">
+        <thead>
+          <th>ID</th>
+          <th>金種</th>
+        </thead>
+        <tbody>
+          <tr th:each="setting1,stat:${setting1}">
+            <td>[[${setting1.kind_id}]]</td>
+            <td>[[${setting1.kind_name}]]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div th:if="${setting2}">
+      <table border="1">
+        <thead>
+          <th>ID</th>
+          <th>種別</th>
+        </thead>
+        <tbody>
+          <tr th:each="setting2,stat:${setting2}">
+            <td>[[${setting2.type_id}]]</td>
+            <td>[[${setting2.type_name}]]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
 
 </body>
