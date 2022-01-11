@@ -63,6 +63,12 @@ public class RecordController {
     record2.setTime("00:00:00");
     recordMapper.insertLog(record2);
     // model.addAttribute("record2", record2);
+    ArrayList<Record> record = recordMapper.selectAllRecord(user_id);
+    model.addAttribute("log1", record);
+    ArrayList<Kind> kind = kindMapper.selectAllUserkind(user_id);
+    ArrayList<Type> type = typeMapper.selectAllUsertype(user_id);
+    model.addAttribute("setting1", kind);
+    model.addAttribute("setting2", type);
     return "record.html";
   }
 

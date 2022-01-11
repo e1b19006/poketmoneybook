@@ -40,6 +40,11 @@ public class StatisticsController {
 
     String java8Disp = nowDate.format(java8Format);
     System.out.println(java8Disp);
+
+    String java8Disp2;
+    java8Disp2 = String.format(java8Disp + "\b\b");
+    System.out.println(java8Disp2+"aaaaaa");
+
     int user_id = Integer.parseInt(prin.getName());
     System.out.println(user_id + " " + java8Disp);
     ArrayList<Record> record = statisticsMapper.selectTypeRecord(user_id, java8Disp);
