@@ -57,9 +57,9 @@ public class StatisticsController {
     int user_id = Integer.parseInt(prin.getName());
     System.out.println(user_id + " " + java8Disp);
     ArrayList<Record> record = statisticsMapper.selectTypeRecord(user_id, java8Disp);
-    model.addAttribute("statistics1", record);
+    model.addAttribute("st1", record);
     Statistics statistics = statisticsMapper.selectSumRecord(user_id, java8Disp);
-    model.addAttribute("stsatistics2", statistics);
+    model.addAttribute("st2", statistics);
     return "statistics.html";
   }
 }
