@@ -24,6 +24,7 @@ import oit.is.t5.poketmoneybook.model.Type;
 import oit.is.t5.poketmoneybook.model.TypeMapper;
 import oit.is.t5.poketmoneybook.model.Record;
 import oit.is.t5.poketmoneybook.model.RecordMapper;
+import oit.is.t5.poketmoneybook.model.Statistics;
 import oit.is.t5.poketmoneybook.model.StatisticsMapper;
 
 @Controller
@@ -42,7 +43,10 @@ public class StatisticsController {
     int user_id = Integer.parseInt(prin.getName());
     System.out.println(user_id + " " + java8Disp);
     ArrayList<Record> record = statisticsMapper.selectTypeRecord(user_id, java8Disp);
-    model.addAttribute("statistics1", record);
+    model.addAttribute("st1", record);
+    Statistics statistics = statisticsMapper.selectSumRecord(user_id, java8Disp);
+    System.out.println(statistics.getValue());
+    model.addAttribute("st2", statistics);
     return "statistics.html";
   }
 
@@ -54,6 +58,8 @@ public class StatisticsController {
     System.out.println(user_id + " " + java8Disp);
     ArrayList<Record> record = statisticsMapper.selectTypeRecord(user_id, java8Disp);
     model.addAttribute("statistics1", record);
+    Statistics statistics = statisticsMapper.selectSumRecord(user_id, java8Disp);
+    model.addAttribute("stsatistics2", statistics);
     return "statistics.html";
   }
 }
