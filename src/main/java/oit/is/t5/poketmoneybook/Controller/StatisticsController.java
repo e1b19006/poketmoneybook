@@ -42,16 +42,20 @@ public class StatisticsController {
     System.out.println(java8Disp);
 
     String java8Disp2;
-    java8Disp2 = String.format(java8Disp + "\b\b");
-    System.out.println(java8Disp2+"aaaaaa");
+    java8Disp2 = String.format("\'" + java8Disp + "\b\b%%\'");
+    System.out.println(java8Disp2 + "aaaaaa");
 
     int user_id = Integer.parseInt(prin.getName());
     System.out.println(user_id + " " + java8Disp);
     ArrayList<Record> record = statisticsMapper.selectTypeRecord(user_id, java8Disp);
     model.addAttribute("st1", record);
-    Statistics statistics = statisticsMapper.selectSumRecord(user_id, java8Disp);
+    Statistics statistics = statisticsMapper.selectSumDRecord(user_id, java8Disp);
     System.out.println(statistics.getValue());
     model.addAttribute("st2", statistics);
+
+    Statistics statistics2 = statisticsMapper.selectSumMRecord(user_id, java8Disp2);
+    System.out.println(statistics2.getValue());
+    model.addAttribute("st3", statistics2);
     return "statistics.html";
   }
 
@@ -59,12 +63,18 @@ public class StatisticsController {
   public String statistics(@RequestParam String value, ModelMap model, Principal prin) {
     String java8Disp = value;
     System.out.println(java8Disp);
+    String java8Disp2;
+    java8Disp2 = String.format(java8Disp + "\b\b%%");
+    System.out.println(java8Disp2 + "ttttt");
     int user_id = Integer.parseInt(prin.getName());
     System.out.println(user_id + " " + java8Disp);
     ArrayList<Record> record = statisticsMapper.selectTypeRecord(user_id, java8Disp);
     model.addAttribute("st1", record);
-    Statistics statistics = statisticsMapper.selectSumRecord(user_id, java8Disp);
+    Statistics statistics = statisticsMapper.selectSumDRecord(user_id, java8Disp);
     model.addAttribute("st2", statistics);
+    Statistics statistics2 = statisticsMapper.selectSumMRecord(user_id, java8Disp2);
+    System.out.println(statistics2.getValue());
+    model.addAttribute("st3", statistics2);
     return "statistics.html";
   }
 }
