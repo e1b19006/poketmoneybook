@@ -18,4 +18,7 @@ public interface StatisticsMapper {
   @Select("select date, sum(value) value from log join kind on (log.kind_id = kind.kind_id) join type on (log.type_id = type.type_id) join user on (log.user_id = user.user_id) where log.user_id = #{user_id} and date like #{date} ")
   Statistics selectSumMRecord(int user_id, String date);
 
+  @Select("select date, value from log where user_id = #{user_id}")
+  ArrayList<Statistics> selectAllUser(int user_id);
+
 }

@@ -36,45 +36,102 @@ public class StatisticsController {
   @GetMapping
   public String statistics(ModelMap model, Principal prin) {
     LocalDateTime nowDate = LocalDateTime.now();
-    DateTimeFormatter java8Format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-    String java8Disp = nowDate.format(java8Format);
-    System.out.println(java8Disp);
-
-    String java8Disp2;
-    java8Disp2 = String.format("\'" + java8Disp + "\b\b%%\'");
-    System.out.println(java8Disp2 + "aaaaaa");
+    DateTimeFormatter YearFormat = DateTimeFormatter.ofPattern("yyyy");
+    DateTimeFormatter MonthFormat = DateTimeFormatter.ofPattern("MM");
+    DateTimeFormatter DayFormat = DateTimeFormatter.ofPattern("dd");
+    DateTimeFormatter DateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     int user_id = Integer.parseInt(prin.getName());
-    System.out.println(user_id + " " + java8Disp);
-    ArrayList<Record> record = statisticsMapper.selectTypeRecord(user_id, java8Disp);
-    model.addAttribute("st1", record);
-    Statistics statistics = statisticsMapper.selectSumDRecord(user_id, java8Disp);
-    System.out.println(statistics.getValue());
-    model.addAttribute("st2", statistics);
+    int sumU = 0;
+    int sumD = 0;
+    int sumM = 0;
 
-    Statistics statistics2 = statisticsMapper.selectSumMRecord(user_id, java8Disp2);
-    System.out.println(statistics2.getValue());
-    model.addAttribute("st3", statistics2);
+    int Year = Integer.parseInt(nowDate.format(YearFormat));
+    int Month = Integer.parseInt(nowDate.format(MonthFormat));
+    int Day = Integer.parseInt(nowDate.format(DayFormat));
+    String date = nowDate.format(DateFormat);
+
+    ArrayList<Record> record = statisticsMapper.selectTypeRecord(user_id, date);
+    ArrayList<Statistics> userRecord = statisticsMapper.selectAllUser(user_id);
+
+    for (int i = 0; i < userRecord.size(); i++) {
+      sumU += userRecord.get(i).getValue();
+    }
+
+    for (int i = 0; i < userRecord.size(); i++) {
+      int year, month, day;
+      year = Integer.parseInt(userRecord.get(i).getDate().substring(0, 4));
+      month = Integer.parseInt(userRecord.get(i).getDate().substring(5, 7));
+      day = Integer.parseInt(userRecord.get(i).getDate().substring(8, 10));
+      System.out.println(year);
+      System.out.println(month);
+      if (Year == year && Month == month && Day == day) {
+        sumD += userRecord.get(i).getValue();
+      }
+    }
+
+    for (int i = 0; i < userRecord.size(); i++) {
+      int year, month;
+      year = Integer.parseInt(userRecord.get(i).getDate().substring(0, 4));
+      month = Integer.parseInt(userRecord.get(i).getDate().substring(5, 7));
+      System.out.println(year);
+      System.out.println(month);
+      if (Year == year && Month == month) {
+        sumM += userRecord.get(i).getValue();
+      }
+    }
+
+    model.addAttribute("st1", record);
+    model.addAttribute("sumD", sumD);
+    model.addAttribute("sumM", sumM);
+
     return "statistics.html";
   }
 
   @PostMapping
   public String statistics(@RequestParam String value, ModelMap model, Principal prin) {
-    String java8Disp = value;
-    System.out.println(java8Disp);
-    String java8Disp2;
-    java8Disp2 = String.format(java8Disp + "\b\b%%");
-    System.out.println(java8Disp2 + "ttttt");
     int user_id = Integer.parseInt(prin.getName());
-    System.out.println(user_id + " " + java8Disp);
-    ArrayList<Record> record = statisticsMapper.selectTypeRecord(user_id, java8Disp);
+    int sumU = 0;
+    int sumD = 0;
+    int sumM = 0;
+
+    int Year = Integer.parseInt(value.substring(0, 4));
+    int Month = Integer.parseInt(value.substring(5, 7));
+    int Day = Integer.parseInt(value.substring(8, 10));
+
+    ArrayList<Record> record = statisticsMapper.selectTypeRecord(user_id, value);
+    ArrayList<Statistics> userRecord = statisticsMapper.selectAllUser(user_id);
+
+    for (int i = 0; i < userRecord.size(); i++) {
+      sumU += userRecord.get(i).getValue();
+    }
+
+    for (int i = 0; i < userRecord.size(); i++) {
+      int year, month, day;
+      year = Integer.parseInt(userRecord.get(i).getDate().substring(0, 4));
+      month = Integer.parseInt(userRecord.get(i).getDate().substring(5, 7));
+      day = Integer.parseInt(userRecord.get(i).getDate().substring(8, 10));
+      System.out.println(year);
+      System.out.println(month);
+      if (Year == year && Month == month && Day == day) {
+        sumD += userRecord.get(i).getValue();
+      }
+    }
+
+    for (int i = 0; i < userRecord.size(); i++) {
+      int year, month;
+      year = Integer.parseInt(userRecord.get(i).getDate().substring(0, 4));
+      month = Integer.parseInt(userRecord.get(i).getDate().substring(5, 7));
+      System.out.println(year);
+      System.out.println(month);
+      if (Year == year && Month == month) {
+        sumM += userRecord.get(i).getValue();
+      }
+    }
+
     model.addAttribute("st1", record);
-    Statistics statistics = statisticsMapper.selectSumDRecord(user_id, java8Disp);
-    model.addAttribute("st2", statistics);
-    Statistics statistics2 = statisticsMapper.selectSumMRecord(user_id, java8Disp2);
-    System.out.println(statistics2.getValue());
-    model.addAttribute("st3", statistics2);
+    model.addAttribute("sumD", sumD);
+    model.addAttribute("sumM", sumM);
     return "statistics.html";
   }
 }
