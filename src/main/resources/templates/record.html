@@ -13,69 +13,126 @@
 
   <h2>Log</h2>
 
-  <div <h3>ようこそ <div sec:authentication="name"></div>
+  <div>
+    <h3>
+      ようこそ <div sec:authentication="name"></div>
     </h3>
+  </div>
 
-    <div th:if="${log1}">
-      <table border="1">
-        <thead>
-          <th>ID</th>
-          <th>金額</th>
-          <th>金種</th>
-          <th>種別</th>
-          <th>日付</th>
-        </thead>
-        <tbody>
-          <tr th:each="log1,stat:${log1}">
-            <td>[[${log1.log_id}]]</td>
-            <td>[[${log1.value}]]</td>
-            <td>[[${log1.kind_name}]]</td>
-            <td>[[${log1.type_name}]]</td>
-            <td>[[${log1.date}]]</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <script type="text/javascript">
+    window.onload = function () {
+      var today = new Date();
+      today.setDate(today.getDate());
+      var yyyy = today.getFullYear();
+      var mm = ("0" + (today.getMonth() + 1)).slice(-2);
+      var dd = ("0" + today.getDate()).slice(-2);
+      var HH = ("0" + today.getHours()).slice(-2);
+      var MM = ("0" + today.getMinutes()).slice(-2);
+      document.getElementById("today").value = yyyy + '-' + mm + '-' + dd;
+      document.getElementById("Time").value = HH + ':' + MM;
+    }
+  </script>
 
-    <form th:action="@{/Record/insert}" method="post">
-      <label>金額<input type="number" name="value"></label>
-      <label> 金種<input type="number" name="kind_id"></label>
-      <label> 種別<input type="number" name="type_id"></label>
-      <input type="submit" value="登録">
-      <input type="reset" value="リセット">
-    </form>
-    <a href="/">戻る</a>
+  <form th:action="@{/Record/insert}" method="post">
+    <label>日付<input type="date" name="date" id="today"></label>
+    <label>時間<input type="time" name="time" id="Time"></label><br>
+    <label>金額<input type="number" name="value"></label><br>
+    <label>金種<input type="number" name="kind_id"></label><br>
+    <input type="radio" name="radio" id='radio1' value="spending" checked onclick="func1(this.checked)">支出
+    <input type="radio" name="radio" id='radio1' value="income" onclick="func1(this.checked)">収入
+    <input type="radio" name="radio" id='radio1' value="transfer" onclick="func0(this.checked)">振替
+    <input type="number" name="to" id="toText" value=1>振替先<br>
+    <label>種別<input type="number" name="type_id" id="type"></label><br>
+    <label>備考<input type="text" name="remark" id="remark"></label><br>
+    <input type="submit" value="登録">
+    <input type="reset" value="リセット">
+  </form>
+  <!--
+  <script>
+    function func0(isChecked) {
+      if (isChecked == 1) {
+        document.getElementById("toText").disabled = false;
+        document.getElementById("remark").disabled = true;
+        document.getElementById("type").disabled = true;
+      }
+      else {
+        document.getElementById("toText").disabled = true;
+        document.getElementById("remark").disabled = false;
+        document.getElementById("type").disabled = false;
+      }
+    }
+    function func1(isChecked) {
+      if (isChecked == 1) {
+        document.getElementById("toText").disabled = true;
+        document.getElementById("remark").disabled = false;
+        document.getElementById("type").disabled = false;
+      }
+      else {
+        document.getElementById("toText").disabled = false;
+        document.getElementById("remark").disabled = true;
+        document.getElementById("type").disabled = true;
+      }
+    }
+  </script>
+-->
+  <a href="/">戻る</a>
 
-    <div th:if="${setting1}">
-      <table border="1">
-        <thead>
-          <th>ID</th>
-          <th>金種</th>
-        </thead>
-        <tbody>
-          <tr th:each="setting1,stat:${setting1}">
-            <td>[[${setting1.kind_id}]]</td>
-            <td>[[${setting1.kind_name}]]</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div th:if="${setting1}">
+    <table border="1">
+      <thead>
+        <th>ID</th>
+        <th>金種</th>
+      </thead>
+      <tbody>
+        <tr th:each="setting1,stat:${setting1}">
+          <td>[[${setting1.kind_id}]]</td>
+          <td>[[${setting1.kind_name}]]</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-    <div th:if="${setting2}">
-      <table border="1">
-        <thead>
-          <th>ID</th>
-          <th>種別</th>
-        </thead>
-        <tbody>
-          <tr th:each="setting2,stat:${setting2}">
-            <td>[[${setting2.type_id}]]</td>
-            <td>[[${setting2.type_name}]]</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
+  <div th:if="${setting2}">
+    <table border="1">
+      <thead>
+        <th>ID</th>
+        <th>種別</th>
+      </thead>
+      <tbody>
+        <tr th:each="setting2,stat:${setting2}">
+          <td>[[${setting2.type_id}]]</td>
+          <td>[[${setting2.type_name}]]</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br>
+  <div th:if="${log1}">
+    <table border="1">
+      <thead>
+        <th>ID</th>
+        <th>金額</th>
+        <th>備考</th>
+        <th>状態</th>
+        <th>金種</th>
+        <th>種別</th>
+        <th>日付</th>
+        <th>時間</th>
+      </thead>
+      <tbody>
+        <tr th:each="log1,stat:${log1}">
+          <td>[[${log1.log_id}]]</td>
+          <td>[[${log1.value}]]</td>
+          <td>[[${log1.remark}]]</td>
+          <td>[[${log1.statusS}]]</td>
+          <td>[[${log1.kind_name}]]</td>
+          <td>[[${log1.type_name}]]</td>
+          <td>[[${log1.date}]]</td>
+          <td>[[${log1.time}]]</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
 </body>
 

@@ -8,6 +8,9 @@ public class Record {
   int type_id;
   String date;
   String time;
+  String remark;
+  int status;
+  String statusS;
   String kind_name;
   String type_name;
   String user_name;
@@ -90,6 +93,30 @@ public class Record {
 
   public void setTime(String time) {
     this.time = time;
+  }
+
+  public String getRemark() {
+    return remark;
+  }
+
+  public void setRemark(String remark) {
+    this.remark = remark;
+  }
+
+  public int getStatus() {
+    return status;
+  }
+
+  public void setStatus(int status) {
+    this.status = status;
+  }
+
+  public String getStatusS() {
+    return statusS;
+  }
+
+  public void setStatusS(String statusS) {
+    this.statusS = statusS;
   }
 
 }
