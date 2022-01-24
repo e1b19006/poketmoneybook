@@ -35,23 +35,33 @@ public class JournalController {
   public String journal(ModelMap model, Principal prin) {
 
     int user_id = Integer.parseInt(prin.getName());
-    int sumU = 0;
+    int sumS = 0;
+    int sumI = 0;
 
     model.addAttribute("dateInfo", "なし");
 
     ArrayList<Record> record = journalMapper.selectAllRecord(user_id);
-    ArrayList<Journal> userRecord = journalMapper.selectAllUser(user_id);
 
     for (int i = 0; i < record.size(); i++) {
-      sumU += record.get(i).getValue();
+      if (record.get(i).getStatus() == 0)
+        sumS += record.get(i).getValue();
+      else if (record.get(i).getStatus() == 1)
+        sumI += record.get(i).getValue();
     }
 
-    Record sumRecord = new Record();
-    sumRecord.setType_name("合計");
-    sumRecord.setValue(sumU);
-    sumRecord.setKind_name("");
-    sumRecord.setDate("");
-    record.add(sumRecord);
+    Record sumSRecord = new Record();
+    sumSRecord.setType_name("支出合計");
+    sumSRecord.setValue(sumS);
+    sumSRecord.setKind_name("");
+    sumSRecord.setDate("");
+    record.add(sumSRecord);
+
+    Record sumIRecord = new Record();
+    sumIRecord.setType_name("収入合計");
+    sumIRecord.setValue(sumI);
+    sumIRecord.setKind_name("");
+    sumIRecord.setDate("");
+    record.add(sumIRecord);
 
     model.addAttribute("journal", record);
 
@@ -61,23 +71,33 @@ public class JournalController {
   @PostMapping
   public String journal(@RequestParam String dateFrom, @RequestParam String dateTo, ModelMap model, Principal prin) {
     int user_id = Integer.parseInt(prin.getName());
-    int sumU = 0;
+    int sumS = 0;
+    int sumI = 0;
 
     model.addAttribute("dateInfo", dateFrom + "～" + dateTo);
 
     ArrayList<Record> record = journalMapper.selectDateRecord(user_id, dateFrom, dateTo);
-    ArrayList<Journal> userRecord = journalMapper.selectAllUser(user_id);
 
     for (int i = 0; i < record.size(); i++) {
-      sumU += record.get(i).getValue();
+      if (record.get(i).getStatus() == 0)
+        sumS += record.get(i).getValue();
+      else if (record.get(i).getStatus() == 1)
+        sumI += record.get(i).getValue();
     }
 
-    Record sumRecord = new Record();
-    sumRecord.setType_name("合計");
-    sumRecord.setValue(sumU);
-    sumRecord.setKind_name("");
-    sumRecord.setDate("");
-    record.add(sumRecord);
+    Record sumSRecord = new Record();
+    sumSRecord.setType_name("支出合計");
+    sumSRecord.setValue(sumS);
+    sumSRecord.setKind_name("");
+    sumSRecord.setDate("");
+    record.add(sumSRecord);
+
+    Record sumIRecord = new Record();
+    sumIRecord.setType_name("収入合計");
+    sumIRecord.setValue(sumI);
+    sumIRecord.setKind_name("");
+    sumIRecord.setDate("");
+    record.add(sumIRecord);
 
     model.addAttribute("journal", record);
     return "journal.html";

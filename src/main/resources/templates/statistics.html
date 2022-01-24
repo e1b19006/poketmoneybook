@@ -10,37 +10,57 @@
 
   <h2>統計</h2>
 
-
-  <div th:if="${sumD}">
-    日合計：[[${sumD}]]
-  </div>
-  <div th:if="${sumM}">
-    月合計：[[${sumM}]]
-  </div>
-
   <form th:action="@{/Statistics}" method="post">
-    <input type="date" name="value">
-    <input type="submit" value="検索">
-    <input type="reset" value="リセット">
+    <nobr>
+      <input type="submit" name="submit1" value="true" />
+      <div th.if="${this}">[[${this}]]</div>
+      <input type="submit" name="submit1" value="false">
+    </nobr>
   </form>
-  <a href="/">戻る</a>
 
-  <div th:if="${st1}">
+
+  <div th:if="${type}">
     <table border="1">
       <thead>
         <th>種別</th>
         <th>金額</th>
-        <th>金種</th>
       </thead>
       <tbody>
-        <tr th:each="st1,stat:${st1}">
-          <td>[[${st1.type_name}]]</td>
-          <td>[[${st1.value}]]</td>
-          <td>[[${st1.kind_name}]]</td>
+        <tr th:each="type,stat:${type}">
+          <td>[[${type.type_name}]]</td>
+          <td>[[${type.value}]]</td>
         </tr>
       </tbody>
     </table>
   </div>
+  <br>
+
+  <div th:if="${kind}">
+    <table border="1">
+      <thead>
+        <th>金種</th>
+        <th>金額</th>
+      </thead>
+      <tbody>
+        <tr th:each="kind,stat:${kind}">
+          <td>[[${kind.kind_name}]]</td>
+          <td>[[${kind.value}]]</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br>
+
+  <div th.if="${sumS}">支出合計：[[${sumS}]]</div>
+
+  <div th.if="${sumI}">収入合計：[[${sumI}]]</div>
+  <br>
+  <div th.if="${BoP}">収支　　：[[${BoP}]]</div>
+  <div th.if="${ratio}">収支割合：[[${ratio}]]%</div>
+  <br>
+  <div th.if="${ratio2}">他のユーザの収支割合：[[${ratio2}]]%</div>
+
+  <a href="/">戻る</a>
 
 </body>
 

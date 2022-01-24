@@ -9,11 +9,6 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface JournalMapper {
-  @Select("select * from log join kind on (log.kind_id = kind.kind_id) join type on (log.type_id = type.type_id) join user on (log.user_id = user.user_id) where log.user_id = #{user_id} and date = #{date}")
-  ArrayList<Record> selectTypeRecord(int user_id, String date);
-
-  @Select("select date, value from log where user_id = #{user_id}")
-  ArrayList<Journal> selectAllUser(int user_id);
 
   @Select("select * from log join kind on (log.kind_id = kind.kind_id) join type on (log.type_id = type.type_id) join user on (log.user_id = user.user_id) where log.user_id = #{user_id}")
   ArrayList<Record> selectAllRecord(int user_id);
