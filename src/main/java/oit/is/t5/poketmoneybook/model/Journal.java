@@ -1,6 +1,6 @@
 package oit.is.t5.poketmoneybook.model;
 
-public class Statistics {
+public class Journal {
   String date;
   int value;
 
